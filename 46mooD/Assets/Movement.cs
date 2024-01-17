@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
+    public float rotationSpeed = 180f;
     public float shakeDuration = 0.1f;
     public float shakeAmount = 0.2f;
 
@@ -21,8 +22,15 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(horizontalInput, verticalInput, 0f);
-        transform.Translate(movement * speed * Time.deltaTime);
+        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
+        transform.Translate(movement * speed * Time.deltaTime, Space.World);
+
+        // Rotate the player based on input
+        if (movement != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(movement.normalized, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+        }
 
         // Check if the player is moving and trigger camera shake
         if (movement.magnitude > 0.1f)
@@ -43,8 +51,13 @@ public class PlayerMovement : MonoBehaviour
         {
             float xOffset = Random.Range(-1f, 1f) * shakeAmount;
             float yOffset = Random.Range(-1f, 1f) * shakeAmount;
+            float zOffset = Random.Range(-1f, 1f) * shakeAmount;
 
-            Camera.main.transform.position = new Vector3(initialPosition.x + xOffset, initialPosition.y + yOffset, initialPosition.z);
+            Camera.main.transform.position = new Vector3(
+                initialPosition.x + xOffset,
+                initialPosition.y + yOffset,
+                initialPosition.z + zOffset
+            );
 
             elapsedTime += Time.deltaTime;
 
@@ -54,4 +67,3 @@ public class PlayerMovement : MonoBehaviour
         Camera.main.transform.position = initialPosition;
     }
 }
-
