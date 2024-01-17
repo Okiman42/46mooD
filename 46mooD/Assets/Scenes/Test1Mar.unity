@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 1448646862}
   - component: {fileID: 1448646861}
   - component: {fileID: 1448646860}
+  - component: {fileID: 1448646863}
   m_Layer: 0
   m_Name: gubbe1
   m_TagString: Untagged
@@ -521,6 +522,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1448646858}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1448646863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448646858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a4787d34232624e9a1f65d7703d714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  rotationSpeed: 10
+  shakeDuration: 0.1
+  shakeAmount: 0.3
 --- !u!1 &2023219608
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2052245442}
   - component: {fileID: 2052245441}
-  - component: {fileID: 2052245443}
+  - component: {fileID: 2052245444}
   m_Layer: 0
   m_Name: Gubbe
   m_TagString: Untagged
@@ -614,7 +631,7 @@ Transform:
   - {fileID: 1448646859}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2052245443
+--- !u!114 &2052245444
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -626,9 +643,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a4787d34232624e9a1f65d7703d714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  shakeDuration: 0.1
-  shakeAmount: 0.05
+  speed: 3
+  rotationSpeed: 10
+  shakeDuration: 0.07
+  shakeAmount: 0.09
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
