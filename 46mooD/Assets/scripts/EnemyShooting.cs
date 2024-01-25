@@ -19,6 +19,9 @@ public class EnemyShooting : MonoBehaviour
 
     void Update()
     {
+        // Rotate the enemy to face the player
+        RotateTowardsPlayer();
+
         // Check if it's time to shoot
         if (Time.time >= nextTimeToShoot && CanSeePlayer())
         {
@@ -32,10 +35,35 @@ public class EnemyShooting : MonoBehaviour
         }
     }
 
+    void RotateTowardsPlayer()
+    {
+        // Calculate the direction from the enemy to the player
+        Vector3 directionToPlayer = player.position - transform.position;
+
+        // Ensure the enemy remains upright when looking at the player
+        directionToPlayer.y = 0;
+
+        // Correct for the initial 90-degree rotation on the X-axis
+        Quaternion rotationCorrection = Quaternion.Euler(90f, 0f, 0f);
+        directionToPlayer = rotationCorrection * directionToPlayer;
+
+        // Rotate the enemy to face the player over time
+        float rotationSpeed = 5f;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(directionToPlayer), Time.deltaTime * rotationSpeed);
+    }
+
     bool CanSeePlayer()
     {
         // Check if there is a clear line of sight to the player using a raycast
         Vector3 directionToPlayer = player.position - transform.position;
+
+        // Correct for the initial 90-degree rotation on the X-axis
+       /* Quaternion rotationCorrection = Quaternion.Euler(90f, 180f, 0f);
+        directionToPlayer = rotationCorrection * directionToPlayer;
+
+        Quaternion rotationCorrectionZ = Quaternion.Euler(0f, 0f, 180f);
+        directionToPlayer = rotationCorrectionZ * directionToPlayer;
+       */
         float distanceToPlayer = directionToPlayer.magnitude;
 
         if (Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, obstacleMask))
@@ -68,11 +96,11 @@ public class EnemyShooting : MonoBehaviour
     void Shoot()
     {
         // Create a bullet and set its properties
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
 
         // Set the initial velocity
-        bulletRb.velocity = firePoint.forward * bulletSpeed;
+        bulletRb.velocity = bullet.transform.forward * bulletSpeed;
 
         // Set the bullet damage directly
         BulletHitbox bulletHitbox = bullet.GetComponent<BulletHitbox>();
