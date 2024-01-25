@@ -41,29 +41,31 @@ public class EnemyShooting : MonoBehaviour
         Vector3 directionToPlayer = player.position - transform.position;
 
         // Ensure the enemy remains upright when looking at the player
-        directionToPlayer.y = 0;
-
-        // Correct for the initial 90-degree rotation on the X-axis
-        Quaternion rotationCorrection = Quaternion.Euler(90f, 0f, 0f);
-        directionToPlayer = rotationCorrection * directionToPlayer;
+        directionToPlayer.y = -90;
 
         // Rotate the enemy to face the player over time
         float rotationSpeed = 5f;
+        // (b - a) * t
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(directionToPlayer), Time.deltaTime * rotationSpeed);
     }
 
     bool CanSeePlayer()
     {
-        // Check if there is a clear line of sight to the player using a raycast
+        // Calculate the direction from the enemy to the player
         Vector3 directionToPlayer = player.position - transform.position;
 
         // Correct for the initial 90-degree rotation on the X-axis
-       /* Quaternion rotationCorrection = Quaternion.Euler(90f, 180f, 0f);
-        directionToPlayer = rotationCorrection * directionToPlayer;
+        Quaternion rotationCorrectionX = Quaternion.Euler(90f, 0f, 0f);
+        directionToPlayer = rotationCorrectionX * directionToPlayer;
 
+        // Correct for the initial 180-degree rotation on the Z-axis
         Quaternion rotationCorrectionZ = Quaternion.Euler(0f, 0f, 180f);
         directionToPlayer = rotationCorrectionZ * directionToPlayer;
-       */
+
+        // Ensure the enemy remains upright when looking at the player
+        directionToPlayer.y = 0;
+
+        // Check if there is a clear line of sight to the player using a raycast
         float distanceToPlayer = directionToPlayer.magnitude;
 
         if (Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, obstacleMask))
@@ -100,7 +102,7 @@ public class EnemyShooting : MonoBehaviour
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
 
         // Set the initial velocity
-        bulletRb.velocity = bullet.transform.forward * bulletSpeed;
+        bulletRb.velocity = -bullet.transform.forward * bulletSpeed;
 
         // Set the bullet damage directly
         BulletHitbox bulletHitbox = bullet.GetComponent<BulletHitbox>();
