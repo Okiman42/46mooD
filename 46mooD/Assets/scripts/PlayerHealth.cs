@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
     private float currentHealth;
+    //[SerializeField] private LayerMask selectedTag;
 
     void Start()
     {
@@ -14,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("collided");
         // Check if the player collides with an object tagged as "Bullet"
         if (other.CompareTag("Bullet"))
         {
