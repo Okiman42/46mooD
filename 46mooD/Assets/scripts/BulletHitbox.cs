@@ -16,6 +16,7 @@ public class BulletHitbox : MonoBehaviour
         // Check if the bullet collides with a player (or other damageable objects)
         if (other.CompareTag("Player"))
         {
+            Debug.Log("hit");
             // Deal damage to the player (or other damageable objects)
             Damageable damageable = other.GetComponent<Damageable>();
             if (damageable != null)
