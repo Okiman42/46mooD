@@ -24,7 +24,7 @@ public class BulletHitbox : MonoBehaviour
             }
 
             // Destroy the bullet on impact
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

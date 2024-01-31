@@ -97,12 +97,15 @@ public class EnemyShooting : MonoBehaviour
 
     void Shoot()
     {
+        // Calculate the direction from firePoint to the player
+        Vector3 shootingDirection = (player.position - firePoint.position).normalized;
+
         // Create a bullet and set its properties
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
 
-        // Set the initial velocity
-        bulletRb.velocity = -bullet.transform.forward * bulletSpeed;
+        // Set the initial velocity using the correct direction
+        bulletRb.velocity = shootingDirection * bulletSpeed;
 
         // Set the bullet damage directly
         BulletHitbox bulletHitbox = bullet.GetComponent<BulletHitbox>();

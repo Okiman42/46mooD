@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 248589854}
   - component: {fileID: 248589853}
   - component: {fileID: 248589856}
+  - component: {fileID: 248589857}
   m_Layer: 0
   m_Name: Bullet prefab cylinder
   m_TagString: Untagged
@@ -363,6 +364,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &248589857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248589851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc2c4299463c4c4b8d3e9f07467ec14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &462519343
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,6 +423,7 @@ GameObject:
   - component: {fileID: 550842968}
   - component: {fileID: 550842969}
   - component: {fileID: 550842970}
+  - component: {fileID: 550842971}
   m_Layer: 7
   m_Name: Capsule
   m_TagString: Player
@@ -568,6 +582,19 @@ MonoBehaviour:
     m_Bits: 64
   shootPoint: {fileID: 961782222}
   spreadFactor: 8
+--- !u!114 &550842971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550842962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6678aa2286f11ed44998e7c6b89d8bd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &677004676
 GameObject:
   m_ObjectHideFlags: 0
