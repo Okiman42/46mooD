@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Weapons : MonoBehaviour
 {
-    public float damage = 10f;              // Damage per shot
+    public float pelletDamage = 10f;              // Damage per shot
+    public float arrowDamage = 40;
     public float fireRate = 1f;             // Shots per second
     public float range = 10f;               // Maximum shooting distance
     public int pelletsPerShot = 10;         // Number of pellets per shot
@@ -20,11 +21,17 @@ public class Weapons : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
-            Shoot();
+            ShootShotgun();
+        }
+
+        if (Input.GetButtonDown("Fire2") && Time.time >= nextTimeToFire)
+        {
+            nextTimeToFire = Time.time + 1f / fireRate;
+            ShootArrow();
         }
     }
 
-    void Shoot()
+    void ShootShotgun()
     {
         // Play shotgun sound or particle effects here
 
@@ -54,7 +61,7 @@ public class Weapons : MonoBehaviour
                     Damageable target = hit.transform.GetComponent<Damageable>();
                     if (target != null)
                     {
-                        target.TakeDamage(damage);
+                        target.TakeDamage(pelletDamage);
                     }
                 }
             }
@@ -62,5 +69,38 @@ public class Weapons : MonoBehaviour
             // Draw debug ray in the Scene view (optional)
             Debug.DrawRay(ray.origin, ray.direction * range, Color.red, 0.1f);
         }
+    }
+
+    void ShootArrow()
+    {
+        Quaternion spreadRotation = Quaternion.Euler(
+            Random.Range(-spreadFactor, spreadFactor),
+            Random.Range(-spreadFactor, spreadFactor),
+            0f
+        );
+
+        // Create a ray from the shoot point with the spread rotation
+        Ray ray = new Ray(shootPoint.position, spreadRotation * shootPoint.forward);
+        RaycastHit hit;
+
+        // Check if the ray hits something
+        if (Physics.Raycast(ray, out hit, range, targetLayer))
+        {
+            Debug.Log("hit");
+            // Check if the hit object has the specified tag
+            if (hit.transform.CompareTag("Enemy"))
+            {
+                Debug.Log("damage");
+                // Deal damage to the hit object
+                Damageable target = hit.transform.GetComponent<Damageable>();
+                if (target != null)
+                {
+                    target.TakeDamage(arrowDamage);
+                }
+            }
+        }
+
+        // Draw debug ray in the Scene view (optional)
+        Debug.DrawRay(ray.origin, ray.direction * range, Color.red, 0.1f);
     }
 }

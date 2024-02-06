@@ -7,11 +7,16 @@ public class PlayerHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
     private float currentHealth;
+
+    [SerializeField] private float _lives;
+
     //[SerializeField] private LayerMask selectedTag;
 
     void Start()
     {
         currentHealth = maxHealth;
+        _lives = currentHealth;
+        Debug.Log(_lives);
     }
 
     void OnTriggerEnter(Collider other)
@@ -48,4 +53,6 @@ public class PlayerHealth : MonoBehaviour
         // For now, let's just deactivate the player GameObject
         gameObject.SetActive(false);
     }
+
+   
 }
