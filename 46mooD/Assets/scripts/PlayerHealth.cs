@@ -1,37 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float maxHealth = 100f; // Maximum health of the player
-    private float currentHealth;   // Current health of the player
+    public float maxHealth = 100f;
+    private float currentHealth;
+
+    [SerializeField] private float _lives;
+
+    //[SerializeField] private LayerMask selectedTag;
 
     void Start()
     {
         currentHealth = maxHealth;
+        _lives = currentHealth;
+        Debug.Log(_lives);
     }
 
-    public void TakeDamage(float amount)
+    void OnTriggerEnter(Collider other)
     {
-        // Reduce health by the specified amount
-        currentHealth -= amount;
-
-        // Check if the player is still alive
-        if (currentHealth <= 0)
+        Debug.Log("collided");
+        // Check if the player collides with an object tagged as "Bullet"
+        if (other.CompareTag("Bullet"))
         {
-            Debug.Log("death");
-            // Die();
+            // Assume the bullet deals a fixed amount of damage (you can customize this)
+            float bulletDamage = 10f;
+            TakeDamage(bulletDamage);
+
+            // Destroy the bullet on impact
+            Destroy(other.gameObject);
+        }
+    }
+
+    void TakeDamage(float damage)
+    {
+        // Reduce the player's health
+        currentHealth -= damage;
+
+        // Check if the player is dead
+        if (currentHealth <= 0f)
+        {
+            Die();
         }
     }
 
     void Die()
     {
-        // Handle death logic here
-        // For example, play death animations, reset the level, etc.
-        Debug.Log("Player has been defeated!");
-        // For simplicity, we'll just disable the GameObject in this example
+        // You can implement death behavior here, such as respawning or game over
+        Debug.Log("Player has died!");
+        // For now, let's just deactivate the player GameObject
         gameObject.SetActive(false);
     }
 
+   
 }
