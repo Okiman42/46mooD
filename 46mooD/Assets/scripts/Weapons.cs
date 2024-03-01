@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class Weapons : MonoBehaviour
 {
-    public float pelletDamage = 10f;              // Damage per shot
+    public float pelletDamage = 10f;              
     public float arrowDamage = 40;
-    public float fireRate = 1f;             // Shots per second
-    public float range = 10f;               // Maximum shooting distance
-    public int pelletsPerShot = 10;         // Number of pellets per shot
-    public LayerMask targetLayer;           // Layer mask to filter targets
-    public Transform shootPoint;            // Point where the shotgun shoots from
-    public float spreadFactor = 5f;         // Spread factor for controlling shotgun spread
+    public float fireRate = 1f;             
+    public float range = 10f;               
+    public int pelletsPerShot = 10;         
+    public LayerMask targetLayer;           
+    public Transform shootPoint;            
+    public float spreadFactor = 5f;         
 
     private float nextTimeToFire = 0f;
 
     void Update()
     {
-        // Check if it's time to shoot
         if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
@@ -33,9 +32,6 @@ public class Weapons : MonoBehaviour
 
     void ShootShotgun()
     {
-        // Play shotgun sound or particle effects here
-
-        // Perform the shotgun spread
         for (int i = 0; i < pelletsPerShot; i++)
         {
             // Calculate spread by adding random rotation multiplied by the spread factor
@@ -49,11 +45,11 @@ public class Weapons : MonoBehaviour
             Ray ray = new Ray(shootPoint.position, spreadRotation * shootPoint.forward);
             RaycastHit hit;
 
-            // Check if the ray hits something
+            
             if (Physics.Raycast(ray, out hit, range, targetLayer))
             {
                 Debug.Log("hit");
-                // Check if the hit object has the specified tag
+                
                 if (hit.transform.CompareTag("Enemy"))
                 {
                     Debug.Log("damage");
@@ -83,11 +79,11 @@ public class Weapons : MonoBehaviour
         Ray ray = new Ray(shootPoint.position, spreadRotation * shootPoint.forward);
         RaycastHit hit;
 
-        // Check if the ray hits something
+        
         if (Physics.Raycast(ray, out hit, range, targetLayer))
         {
             Debug.Log("hit");
-            // Check if the hit object has the specified tag
+            
             if (hit.transform.CompareTag("Enemy"))
             {
                 Debug.Log("damage");
