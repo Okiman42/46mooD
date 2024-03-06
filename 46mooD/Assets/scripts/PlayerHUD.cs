@@ -12,17 +12,27 @@ public class PlayerHUD : MonoBehaviour
     public Sprite fullLine;
     public Sprite emptyLine;
 
+    [SerializeField] PlayerHealth playerHealth;
+
+    public void Start()
+    {
+        Debug.Log(hearts);
+    }
+
     void Update()
     {
+        health = (int)playerHealth.GetCurrentHealth();
      
         if ( health > numOfHearts)
         {
+            //Debug.Log(health + "health 1");
             health = numOfHearts;
+            //Debug.Log(health + "health 2");
         }
 
         for (int i = 0; i < hearts.Length; i++)
         {
-            if(i < health)
+            if (i < health)
             {
                 hearts[i].sprite = fullLine;
             }
@@ -32,10 +42,9 @@ public class PlayerHUD : MonoBehaviour
             }
         }
 
-
         for (int i = 0; i < hearts.Length; i++)
         {
-            if(i < numOfHearts)
+            if (i < numOfHearts)
             {
                 hearts[i].enabled = true;
             }
@@ -44,7 +53,10 @@ public class PlayerHUD : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+
+        Debug.Log(health + " update");
     }
 
+    
 
 }

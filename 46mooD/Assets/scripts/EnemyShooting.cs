@@ -11,7 +11,7 @@ public class EnemyShooting : MonoBehaviour
     public int burstSize = 3;           // Number of shots in a burst
     public float burstCooldown = 1f;    // Cooldown between bursts
     public float bulletSpeed = 10f;     // Speed of the fired bullets
-    public float damage = 10f;          // Damage dealt to the player
+    public float damage;                // Damage dealt to the player
     public LayerMask obstacleMask;      // Layer mask for obstacles that can block line of sight
 
     private float nextTimeToShoot = 0f;

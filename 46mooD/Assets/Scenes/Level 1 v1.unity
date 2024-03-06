@@ -11986,6 +11986,7 @@ MonoBehaviour:
   - {fileID: 873572992}
   fullLine: {fileID: 21300000, guid: 56e80a9d73d71a441b6e7bcf4199172a, type: 3}
   emptyLine: {fileID: 21300000, guid: fda6c0469bb32764e956acca825353b5, type: 3}
+  playerHealth: {fileID: 2106412008}
 --- !u!4 &1746505560
 Transform:
   m_ObjectHideFlags: 0
@@ -12057,7 +12058,7 @@ MonoBehaviour:
   burstSize: 3
   burstCooldown: 1
   bulletSpeed: 10
-  damage: 10
+  damage: 1
   obstacleMask:
     serializedVersion: 2
     m_Bits: 256
@@ -13354,7 +13355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6678aa2286f11ed44998e7c6b89d8bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 10
+  currentHealth: 0
   _lives: 0
 --- !u!114 &2106412009
 MonoBehaviour:
