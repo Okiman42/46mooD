@@ -8,18 +8,27 @@ public class PlayerHUD : MonoBehaviour
     public int health;
     public int numOfHearts;
 
-    public RawImage[] hearts;
+    public Image[] hearts;
     public Sprite fullLine;
     public Sprite emptyLine;
 
     void Update()
     {
      
+        if ( health > numOfHearts)
+        {
+            health = numOfHearts;
+        }
+
         for (int i = 0; i < hearts.Length; i++)
         {
             if(i < health)
             {
-                hearts[i].
+                hearts[i].sprite = fullLine;
+            }
+            else
+            {
+                hearts[i].sprite = emptyLine;
             }
         }
 
