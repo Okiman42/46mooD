@@ -18,7 +18,7 @@ public class Weapons : MonoBehaviour
     void Update()
     {
        
-        .GetComponent<>
+       // .GetComponent<>
 
 
         if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
